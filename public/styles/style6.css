@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,800;1,600&display=swap');
+
+/* Chrome, Safari, Edge, Opera */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+     text-align: center;
+}
+
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+    text-align: center;
+    margin-right:2px;
+}
+
+
+#atras {
+
+    text-decoration: underline;
+    transition: all 1s;
+    height: 20px;
+    width: 600px;
+    color: #253141;
+    display: flex;
+    align-items: center;
+  }
+  
+  
+  
+  .btn-primary {
+
+    background-color:#253141;
+    color:#EFF3F6;
+  
+}
+
+.btn {
+  border: 0px solid;
+  margin-bottom: 30px;
+    margin-left: 5px;
+}
+
+#botones button{
+    margin-left:10px;
+    border-radius: 5px;
+}
+
+
+  
+  
+  #titulo img {
+      height:30px;
+      width:30px;
+  }
+
+#tabla-prod {
+    flex-direction: row;
+    flex: auto;
+    margin-left: 50px;
+}
+
+td {
+
+    text-align: center;
+    padding-top: 30px;
+    width: 150px;
+    margin-top: 5px;
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 14px;
+    border-bottom: solid 1px #253141;
+}
+
+table {
+   width: 90%;
+   margin:auto;
+
+}
+
+th {
+    font-size: 20px;
+    padding: 5px;
+    background-color: #B7BCC0;
+    text-align: center;
+
+}
+
+#code {
+    font-size: 17px;
+
+    margin-left: 40px;
+    float: left;
+    color: #B7BCC0;
+}
+
+td img {
+    height: fit-content;
+    width: 80px;
+    border: 3px solid #253141;
+    float: left;
+}
+
+#basura {
+ 
+    width: 35px;
+    height: 35px;
+    border: none;
+    transition: all 1s;
+
+}
+
+#basura:hover {
+    transform: scale(1.1);
+
+
+}
+.tdbotones{
+    text-align: center !important;
+    width: 30px !important;
+    height: 20px !important;
+}
+
+.editar {
+    width: auto;
+    height: 35px;
+    border: none;
+    transition: all 1s;
+    cursor: pointer;
+    margin-left: 2px;
+  
+}
+
+.editar:hover {
+    transform: scale(1.1);
+}
+
+#quitaragregar button {
+    padding: 6px;
+    border: none;
+
+
+}
+
+#stock{
+    width: 25px;
+    height: 25px;
+    font-size: 90%;
+    padding: 5px;
+    text-align: center;
+}
+#precio{
+ 
+    height: 25px;
+    font-size: 90%;
+    padding: 5px;
+    text-align: center;
+}
+
+
