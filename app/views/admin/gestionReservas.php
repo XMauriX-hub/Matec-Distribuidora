@@ -23,8 +23,8 @@
         <h2> Gestión de Reservas </h2>
       </div>
       <hr>
-      <div class="col-4 mt-3 mb-3" id="atras" onclick="history.back()">
-        <p><img src="../img/angle-left.png"> Volver atras</p>
+      <div class="col-4 mt-3 mb-3" id="atras">
+        <p><img src="../img/angle-left.png"><a href="/admin"> Volver atras</a></p>
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@
         </select>
       </form>
     </div>
-    <form method="POST" id="formulario" action="/admin/gestionReservas">
+    <form method="POST" id="formulario" onsubmit="verificarCamposHabilitados(event)" action="/admin/gestionReservas">
       <div class="btn-group" role="group" aria-label="Basic example">
         <button type="button" id="edicion" class="btn btn-primary" onclick="activarEdicion()">Activar Edicion</button>
         <button type="submit" class="btn btn-success">Guardar cambios</button>
@@ -160,6 +160,22 @@
         const row = $(this).closest("tr");
         actualizarSubtotal(row);
       });
+
+      if (!performance.getEntriesByType("navigation")[0].type.includes("back_forward")) {
+          localStorage.removeItem("defaultEstado1");
+        }
+
+    const selectFiltroEst = document.getElementById("filtroEst");
+    const formEst = document.getElementById("formEst");
+    const defaultEstado = localStorage.getItem("defaultEstado1");
+    if (defaultEstado !== null) {
+      selectFiltroEst.value = defaultEstado;
+    }
+    selectFiltroEst.addEventListener("change", (event) => {
+      localStorage.setItem("defaultEstado1", selectFiltroEst.value);
+
+      formEst.submit();
+    });
       
 
       function actualizarCantidad(id, accion, max) {
@@ -174,12 +190,13 @@
       window.actualizarCantidad = actualizarCantidad;
     });
 
-    window.addEventListener("load", (event) => {
-      <?php if (!empty($msg)): ?>
-        let mensaje = <?= json_encode($msg) ?>;
-        alert(mensaje);
-      <?php endif; ?>
+       window.addEventListener("load", (event) => {
+        <?php if (!empty($msg)): ?>
+            let mensaje = <?= json_encode($msg) ?>;
+            mostrarPopup(mensaje, false); // Cambia alert por mostrarPopup
+        <?php endif; ?>
     });
+    
 
     function agregarProducto() {
       document.getElementById("formulario").action = "/admin/agregarProducto";
@@ -240,17 +257,27 @@
       document.getElementById("popup-" + id).style.display = "none";
     }
 
-    const selectFiltroEst = document.getElementById("filtroEst");
-    const formEst = document.getElementById("formEst");
-    const defaultEstado = localStorage.getItem("defaultEstado2");
-    if (defaultEstado !== null) {
-      selectFiltroEst.value = defaultEstado;
-    }
-    selectFiltroEst.addEventListener("change", (event) => {
-      localStorage.setItem("defaultEstado2", selectFiltroEst.value);
+     
+       function verificarCamposHabilitados(event) {
+    event.preventDefault(); // Prevenir el envío predeterminado del formulario
+    const camposEditables = document.querySelectorAll('#editable');
+    let todosHabilitados = true;
 
-      formEst.submit();
+    camposEditables.forEach(campo => {
+        if (campo.disabled) {
+            todosHabilitados = false;
+            campo.disabled = false;
+        }
     });
+
+    if (!todosHabilitados) {
+        alert("Algunos campos estaban deshabilitados. Ahora están habilitados. Por favor, revisa los datos y vuelve a enviar.");
+        return;
+    }
+
+    // Usamos event.target.submit() para enviar el formulario correcto
+    event.target.submit();
+}
   </script>
 </body>
 

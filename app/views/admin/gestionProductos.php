@@ -88,23 +88,24 @@
       window.addEventListener("load", (event) => {
         <?php if (!empty($msg)): ?>
             let mensaje = <?= json_encode($msg) ?>;
-            mostrarPopup(mensaje, false); // Cambia alert por mostrarPopup
+            mostrarPopup(mensaje, false);
         <?php endif; ?>
-    });
 
+        if (!performance.getEntriesByType("navigation")[0].type.includes("back_forward")) {
+          localStorage.removeItem("defaultEstado2");
+        }
 
-    //filtrar por categoria
-    const selectFiltroCat = document.getElementById("filtroCat");
-    const formCat = document.getElementById("formCat");
-    const defaultEstado = localStorage.getItem("defaultEstado2");
-    if (defaultEstado !== null) {
-      selectFiltroCat.value = defaultEstado;
-    }
-    selectFiltroCat.addEventListener("change", (event) => {
-      localStorage.setItem("defaultEstado2", selectFiltroCat.value);
-
-      formCat.submit();
-    });
+        const selectFiltroCat = document.getElementById("filtroCat");
+        const formCat = document.getElementById("formCat");
+        const defaultEstado = localStorage.getItem("defaultEstado2");
+        if (defaultEstado !== null) {
+          selectFiltroCat.value = defaultEstado;
+        }
+        selectFiltroCat.addEventListener("change", (event) => {
+          localStorage.setItem("defaultEstado2", selectFiltroCat.value);
+          formCat.submit();
+        });
+      });
 
     function añadirProducto() {
       document.location.href = "/admin/aniadirProducto";
